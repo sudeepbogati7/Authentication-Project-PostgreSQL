@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "sudeep",
+    "password": "sudeep1234",
+    "database": "authentication-Project",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "sudeep",
+    "password": "sudeep1234",
+    "database": "authentication-Project",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
