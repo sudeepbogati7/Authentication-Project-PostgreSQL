@@ -1,0 +1,30 @@
+{
+  "name": "authentication-ts-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sudeep Bogati",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/passport": "^1.0.16",
+    "@types/passport-google-oauth": "^1.0.45",
+    "@types/passport-local": "^1.0.38",
+    "nodemon": "^3.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/sequelize": "^4.28.19",
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.8",
+    "passport": "^0.7.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.11.3",
+    "sequelize-typescript": "^2.1.6"
+  }
+}
