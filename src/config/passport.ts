@@ -6,7 +6,6 @@ import { DoneFunction } from 'sequelize/types';
 import { bcrypt } from 'bcrypt';
 
 
-
 interface SerializedUser {
     userId : number;
 }
