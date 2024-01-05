@@ -2,9 +2,11 @@ import passport, { use } from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 // import { Strategy as GoogleStrategy } from 'passport-google-oauth';
 import { User } from '../models/User';
-import { DoneFunction } from 'sequelize/types';
 import  bcrypt  from 'bcrypt';
 
+interface user {
+    userId : number;
+}
 
 interface SerializedUser {
     userId : number;
@@ -15,10 +17,10 @@ passport.serializeUser((user, done ) => {
     done(null, user.userId);
 });
 
-passport.deserializeUser(async(serializeUser : SerializedUser, done : DoneFunction<User>) =>{
+passport.deserializeUser(async(serializeUser : SerializedUser, done ) =>{
     try{
         const user = await User.findByPk(serializeUser.userId);
-        if (!user) return done(null, false, { message: "User not found !"});
+        if (!user) return done(null, false, {message: "User not found"});
 
         done(null, user);
     }catch(error){

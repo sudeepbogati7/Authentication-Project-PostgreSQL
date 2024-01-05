@@ -75,8 +75,10 @@ router.get("/profile", (req: Request, res : Response) => {
 //logout
 router.post("/logout" , async(req: Request, res: Response) => {
     if (req.isAuthenticated()){
-        req.logout();
-        return res.status(200).json({ message : "Logout Successful "});
+        req.logout((err) => {
+            res.status(500).json("Error while logging out ")
+            return res.status(200).json({ message : "Logout Successful "});
+        });
     }else{
         return res.status(401).json({ error : "Unauthorized "});
     }

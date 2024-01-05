@@ -47,6 +47,7 @@ export class User extends Model<User> {
     })
     googleId?: string;
 
+
     static async hashPassword(instance: User):Promise<void> {
         if (instance.changed('password')) {
             const saltRounds = 10;

@@ -1,5 +1,5 @@
-import * as  express from 'express';
-import * as bodyParser from 'body-parser';
+const express = require('express');
+const bodyParser = require('body-parser');
 import sequelize from './src/config/sequelize';
 const app = express();
 
