@@ -1,9 +1,9 @@
 import { Request , Response } from "express";
 import { User } from '../models/User';
-import bcrypt from 'bcrypt';
-import express from 'express'
+import * as bcrypt from 'bcrypt';
+import * as express from 'express'
 import { Op } from 'sequelize';
-import passport from "passport";
+import * as passport from "passport";
 import { responseEncoding } from "axios";
 const router = express.Router();
 
@@ -129,9 +129,12 @@ router.delete("/delete" , async(req: Request, res: Response) => {
             //delete user accoutn
             await authenticatedUser.destroy();
     
-            req.logout();
+            req.logout((err : Error) => {
+                if(err) return res.status(500).json("Error while logging out ");
+
+                return res.status(200).json({ message : "Account deleted successfully " });
+            });
     
-            return res.status(200).json({ message : "Account deleted successfully " });
         }else{
             return res.status(401).json({ error : "Unauthorized "});
         }

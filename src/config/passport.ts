@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 // import { Strategy as GoogleStrategy } from 'passport-google-oauth';
 import { User } from '../models/User';
 import { DoneFunction } from 'sequelize/types';
-import { bcrypt } from 'bcrypt';
+import  bcrypt  from 'bcrypt';
 
 
 interface SerializedUser {
