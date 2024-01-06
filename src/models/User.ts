@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, BeforeCreate } from 'sequelize-typescript';
 import { Sequelize } from 'sequelize';
 import * as  bcrypt from 'bcrypt';
+
 @Table({
     tableName: 'users',
     timestamps: true,
@@ -26,7 +27,6 @@ export class User extends Model<User> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
         unique: true,
         validate: {
             isEmail: true,
@@ -48,6 +48,7 @@ export class User extends Model<User> {
     googleId?: string;
 
 
+    @BeforeCreate
     static async hashPassword(instance: User):Promise<void> {
         if (instance.changed('password')) {
             const saltRounds = 10;
@@ -57,7 +58,7 @@ export class User extends Model<User> {
     }
 }
 
-User.addHook('beforeCreate' ,async (user:User) :Promise<void> => {
-    await User.hashPassword(user);
-})
+// User.addHook('beforeCreate' ,async (user:User) :Promise<void> => {
+//     await User.hashPassword(user);
+// })
 
