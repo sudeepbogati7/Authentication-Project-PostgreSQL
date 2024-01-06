@@ -7,6 +7,14 @@ import * as passport from "passport";
 import { responseEncoding } from "axios";
 const router = express.Router();
 
+
+import { validateUserRegistration } from '../middlewares/validateUser';
+
+
+
+
+
+
 interface RegisterUserBody {
     username : string, 
     email : string, 
@@ -15,17 +23,14 @@ interface RegisterUserBody {
 
 
 // route for registration 
-router.post("/register" , async(req : Request<any , any, RegisterUserBody>, res: Response) => {
+router.post("/register" , validateUserRegistration, async(req : Request<any , any, RegisterUserBody>, res: Response) => {
     
     try{
         const { username , email , password } = req.body;
     
         //checking if the username or email already exists
-        const existingUser = await User.findOne({
-            where : {
-                [Op.or]: [ {username}, {email} ],
-            },
-        });
+        const existingUser = await User.findOne({ where : { email }});
+
         if(existingUser) return res.status(400).json({ error : "Username or email already exists"});
     
         //creating a new user
@@ -45,7 +50,8 @@ router.post("/register" , async(req : Request<any , any, RegisterUserBody>, res:
 
 // login route 
 
-router.post("/login" , async(req : Request, res : Response , next) => {
+router.post("/login" , async(req : Request, res : Response , next: express.NextFunction) => {
+    const { email , password } = req.body;
     passport.authenticate('local', (err: Error, user : any, info: any) => {
         if (err) return res.status(500).json({ error : "Internal server error"});
 
