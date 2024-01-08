@@ -3,7 +3,8 @@ import { User } from '../models/User';
 import * as bcrypt from 'bcrypt';
 import * as express from 'express'
 import { Op } from 'sequelize';
-import * as passport from "passport";
+// import * as passport from "passport";
+import passport from '../config/passport';
 import { responseEncoding } from "axios";
 const router = express.Router();
 
@@ -49,9 +50,8 @@ router.post("/register" , validateUserRegistration, async(req : Request<any , an
 
 
 // login route 
-
 router.post("/login" , async(req : Request, res : Response , next: express.NextFunction) => {
-    const { email , password } = req.body;
+    const { email , password } = req.body;  
     passport.authenticate('local', (err: Error, user : any, info: any) => {
         if (err) return res.status(500).json({ error : "Internal server error"});
 
@@ -65,6 +65,8 @@ router.post("/login" , async(req : Request, res : Response , next: express.NextF
 
     })(req, res, next);
 });
+
+
 
 // view user profile
 router.get("/profile", (req: Request, res : Response) => {
@@ -82,7 +84,7 @@ router.get("/profile", (req: Request, res : Response) => {
 router.post("/logout" , async(req: Request, res: Response) => {
     if (req.isAuthenticated()){
         req.logout((err) => {
-            res.status(500).json("Error while logging out ")
+            if (err) return res.status(500).json("Error while logging out ");
             return res.status(200).json({ message : "Logout Successful "});
         });
     }else{

@@ -5,20 +5,21 @@ import { User } from '../models/User';
 import bcrypt from 'bcrypt';
 
 
-interface SerializedUser {
-    userId: number;
-}
-
 // serialize 
 passport.serializeUser((user : any, done) => {
+    console.log("Serializing user : ", user.userId);
     done(null, user.userId);
 });
 
-passport.deserializeUser(async (serializeUser: SerializedUser, done) => {
+passport.deserializeUser( async (userId: any, done) => {
     try {
-        const user = await User.findByPk(serializeUser.userId);
-        if (!user) return done(null, false);
+        const user = await User.findByPk(userId);
+        if (!user) {
+            done(null, false);  
+            console.log("User not found ");
+        } 
 
+        console.log("User found , ", user);
         done(null, user);
     } catch (error) {
         done(error);
@@ -34,9 +35,9 @@ passport.use(
             usernameField: 'email' ,
             passwordField : 'password'
         },
-        async (username, password, done) => {
+        async (email, password, done) => {
         try {
-            const user = await User.findOne({ where: { username } });
+            const user = await User.findOne({ where: { email } });
 
             if (!user) return done(null, false, { message: "Incorrect email " });
 

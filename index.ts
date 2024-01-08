@@ -38,13 +38,11 @@ app.use(
   })
 );
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 //routes 
 import userRoutes from './src/routes/auth';
-import { couldStartTrivia } from 'typescript';
 app.use("/api/users", userRoutes);
 
 
