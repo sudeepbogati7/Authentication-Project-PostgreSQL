@@ -1,7 +1,6 @@
 ## User Authentication Project 
 
-**Tools Used :** `TypeScript`, `NODE.js` `Passport.js`, `PostgreSQL`
-
+**Tools Used :** `TypeScript`, `NODE.js` `Passport.js20.9.0`, `PostgreSQL`
 *TO GET STARTED*
 
 1. Save the repo locally : <br>
