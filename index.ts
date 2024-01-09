@@ -46,6 +46,10 @@ import userRoutes from './src/routes/auth';
 app.use("/api/users", userRoutes);
 
 
+//password reset Route : 
+import resetPassword from './src/routes/resetPassword';
+app.use("/api/users", resetPassword);
+
 
 sequelize.sync()
   .then(() => {

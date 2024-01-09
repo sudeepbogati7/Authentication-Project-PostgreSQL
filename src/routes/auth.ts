@@ -44,7 +44,7 @@ router.post("/register" , validateUserRegistration, async(req : Request<any , an
         res.status(201).json({ success : true, user : newUser , message : "Sucessfully registered a new user "});
     }catch(error){
         console.log("Internal server error : ", error);
-        res.status(500).json({ error : "Internal server error : ",});
+        res.status(500).json({ error : `Internal server error : ${error}`});
     }
 });
 

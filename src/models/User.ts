@@ -1,6 +1,8 @@
-import { Table, Column, Model, DataType, BeforeCreate } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BeforeCreate, HasOne, HasMany } from 'sequelize-typescript';
 import { Sequelize } from 'sequelize';
 import * as  bcrypt from 'bcrypt';
+import { PasswordReset } from './PasswordReset';
+import * as crypto from 'crypto';
 
 @Table({
     tableName: 'users',
@@ -48,6 +50,10 @@ export class User extends Model<User> {
     googleId?: string;
 
 
+    @HasMany(()=> PasswordReset)
+    passwordReset!: PasswordReset;
+
+
     @BeforeCreate
     static async hashPassword(instance: User):Promise<void> {
         if (instance.changed('password')) {
@@ -56,9 +62,24 @@ export class User extends Model<User> {
             instance.password = hashedPassword;
         }
     }
+
+    // password reset token 
+
+    static async generatePasswordResetToken(instance : User) {
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        const resetExpires = new Date();
+
+        resetExpires.setHours(resetExpires.getHours() +1 ); // expires in 1 hr
+        const resetExpiresString = resetExpires.toISOString();
+        await instance.$create('PasswordReset', {
+            resetPasswordToken : resetToken,
+            resetPasswordExpires: resetExpiresString,
+        });
+
+        console.log("Token from model : ", resetToken);
+        return resetToken;
+    }
 }
 
-// User.addHook('beforeCreate' ,async (user:User) :Promise<void> => {
-//     await User.hashPassword(user);
-// })
+
 

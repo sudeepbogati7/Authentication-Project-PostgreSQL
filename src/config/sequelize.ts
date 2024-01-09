@@ -1,6 +1,7 @@
 import { Sequelize  } from "sequelize-typescript";
 import { User } from '../models/User';
 import * as pg from 'pg';
+import { PasswordReset } from "../models/PasswordReset";
 
 const sequelize = new Sequelize({
     dialect : 'postgres',
@@ -9,7 +10,7 @@ const sequelize = new Sequelize({
     username : 'sudeep',
     password : 'sudeep1234',
     database : 'authentication-Project',
-    models : [User],
+    models : [User, PasswordReset],
     logging : console.log,
     dialectModule : pg
 });
