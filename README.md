@@ -4,16 +4,26 @@
 *TO GET STARTED*
 
 1. Save the repo locally : <br>
-``` git clone https://github.com/sudeepbogati7/Authenticatio-Project- ```
+```
+git clone https://github.com/sudeepbogati7/Authenticatio-Project-
+ ```
 
-2. Nevigate to the folder :<br>
-```cd Authenticatio-Project- ```
+3. Nevigate to the folder :<br>
+```
+cd Authenticatio-Project-
+ ```
 
-3. Install Dependencies : <br>
- ```npm install ```
+5. Install Dependencies : <br>
+ ```
+npm install
+```
 
- 4. Start the project :<br>
-``` npm start ```
+ 7. Start the project :<br>
+```
+npm start
+ ```
 
-5. explore : <br>
-```http://localhost:3000/api/users/register```
+9. explore : <br>
+```
+http://localhost:3000/api/users/register
+```
