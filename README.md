@@ -1,7 +1,10 @@
 ## User Authentication Project 
 
 **Tools Used :** `TypeScript`, `NODE.js 20.9.0` `Passport.js`, `PostgreSQL`
-*TO GET STARTED*
+
+**TO GET STARTED**
+
+` $ Open your terminal window : `
 
 1. Save the repo locally : <br>
 ```
